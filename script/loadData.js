@@ -50,16 +50,37 @@ const showData = (data) => {
 };
 
 const handleShowDetails = async (id) => {
+ 
   document.getElementById("showDetailsModal").showModal();
-  console.log(id);
-  const url = `https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`;
-  const res = await fetch(url);
-  const data = await res.json();
-  showDetails(data.data);
+
+  const modal = document.getElementById("modalContain");
+  modal.innerHTML = "";
+
+  loadingSpiner(true);
+
+  try {
+    const url = `https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`;
+    const res = await fetch(url);
+
+    if (!res.ok) {
+      throw new Error("Failed to load issue details");
+    }
+
+    const data = await res.json();
+
+    showDetails(data.data);
+  } catch (error) {
+    console.log(error);
+    modal.innerHTML = `<p>Failed to load issue details!</p>`;
+  } finally {
+    loadingSpiner(false);
+  }
 };
 
+
 const showDetails = (Data) => {
-  console.log(Data);
+
+ loadingSpiner(true); // Spinner দেখাবে
   const modal = document.getElementById("modalContain");
   modal.innerHTML = "";
 
@@ -112,6 +133,18 @@ const showDetails = (Data) => {
     `;
 
   modal.appendChild(DIV);
+  loadingSpiner(false); // Spinner লুকাবে
+};
+
+
+const loadingSpiner = (status) => {
+  const loading = document.getElementById("LoadingSpiner2");
+
+  if (status) {
+    loading.classList.remove("hidden");
+  } else {
+    loading.classList.add("hidden");
+  }
 };
 
 loadData();
