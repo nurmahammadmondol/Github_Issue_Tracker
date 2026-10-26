@@ -1,11 +1,128 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Github Issue Tracker | Home</title>
-</head>
-<body>
-    <h2> Home Page </h2>
-</body>
+
+    <link
+      rel="shortcut icon"
+      href="./assets/github-logo.png"
+      type="image/x-icon"
+    />
+
+    <!-- Tailwind+daisyUI  -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@5"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- Font awosame -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.css"
+      integrity="sha512-x9WwyMYBnlXMNQ6kQ/Lyzu1NqIhLQKL5Oq6xByfXuRj7s9CskyCbLv/1IjqzJmXwFXWr0ov6jBV7Qbc0hh9nHg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <!-- Navbar Section  -->
+    <Navbar>
+      <div class="navbar bg-base-100 shadow-sm">
+        <div class="flex flex-1 items-center">
+          <img class="w-10" src="./assets/github-logo.png" alt="" />
+          <a class="btn btn-ghost text-xl font-bold">Github Issue Tracker</a>
+        </div>
+
+        <div class="join">
+          <div>
+            <label class="input validator join-item">
+              <input type="text" placeholder="search issue" required />
+            </label>
+          </div>
+          <button class="btn btn-primary join-item">
+            <i class="fa-solid fa-plus"></i> No Issue
+          </button>
+        </div>
+      </div>
+    </Navbar>
+
+    <!-- Button Section  -->
+    <section
+      class="w-11/12 md:w-10/12 lg:w-9/12 mx-auto bg-gray-50 border-2 border-gray-100 rounded-lg p-5 my-10 flex items-center gap-2"
+    >
+      <button class="btn px-6">All</button>
+      <button class="btn px-6">Open</button>
+      <button class="btn px-6">Closed</button>
+    </section>
+
+    
+
+    <!-- ShowData Section  -->
+    <section
+      class="w-11/12 md:w-10/12 lg:w-9/12 mx-auto bg-gray-50 rounded-lg p-5 my-10"
+    >
+      <div class="flex justify-between border-b border-gray-200 pb-5">
+        <div class="flex items-center gap-2">
+          <!-- logo  -->
+          <div><img src="./assets/Aperture.png" alt="" /></div>
+          <!-- Text  -->
+          <div>
+            <h6 class="text-xl font-bold">50 Issues</h6>
+            <p>Track and manage your project Issues.</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-5">
+          <small class="flex items-center gap-1"
+            ><img
+              class="w-4"
+              src="./assets/Open-Status.png"
+              alt="Open-Status"
+            />
+            Open</small
+          >
+          <small class="flex items-center gap-1"
+            ><img
+              class="w-4"
+              src="./assets/Closed- Status .png"
+              alt="Closed-Status"
+            />
+            Closed</small
+          >
+        </div>
+      </div>
+
+      <!-- All card  -->
+      <div
+        id="cardContainer"
+        class="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5"
+      >
+        <!-- single card  -->
+
+        <!-- Open the modal using ID.showModal() method -->
+        <!-- <button class="btn" onclick="showDetailsModal.showModal()">open modal</button> -->
+        <dialog id="showDetailsModal" class="modal modal-bottom sm:modal-middle">
+          <div class="modal-box">
+            <div id="LoadingSpiner" class="text-center hidden">
+                <span class="loading loading-spinner loading-xl"></span>
+              </div>
+
+            <div id="modalContain"> </div>
+            <div class="modal-action">
+              <form method="dialog">
+                <!-- if there is a button in form, it will close the modal -->
+                <button class="btn btn-primary">Close</button>
+              </form>
+            </div>
+          </div>
+        </dialog>
+      </div>
+    </section>
+
+    <script src="./script/loadData.js"></script>
+  </body>
 </html>
